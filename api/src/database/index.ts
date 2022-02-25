@@ -1,4 +1,4 @@
-import { Connection, createConnection, SimpleConsoleLogger } from 'typeorm';
+import { Connection, createConnection } from 'typeorm';
 import dotenv from 'dotenv';
 
 dotenv.config({});
