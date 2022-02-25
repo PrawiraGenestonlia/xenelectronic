@@ -5,6 +5,7 @@ import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import { ValidateError } from 'tsoa';
 import { RegisterRoutes } from '../tsoa/routes';
+import path from 'path';
 import '@database';
 
 const app: Express = express();
@@ -28,19 +29,27 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'productio
   app.use(helmet());
 }
 
+
 /************************************************************************************
  *                               Register all routes
  ***********************************************************************************/
 
 RegisterRoutes(app);
 
-app.get('/', async (req: express.Request, res: express.Response) => {
-  return res.redirect('/docs');
-});
-
-app.use('/docs', swaggerUi.serve, async (req: express.Request, res: express.Response) => {
+app.use('/api/docs', swaggerUi.serve, async (req: express.Request, res: express.Response) => {
   return res.send(swaggerUi.generateHTML(await import('../tsoa/swagger.json')));
 });
+
+/************************************************************************************
+ *                               Serve react app
+ ***********************************************************************************/
+
+app.use(express.static(path.join(__dirname, __dirname.includes('api') ? '../../../ui/build' : '../../ui/build')));
+app.get('*', async (req: express.Request, res: express.Response) => {
+  return res.sendFile(path.join(__dirname, __dirname.includes('api') ? '../../../ui/build' : '../../ui/build', '/index.html'));
+});
+
+
 
 /************************************************************************************
  *                               Express Error Handling
