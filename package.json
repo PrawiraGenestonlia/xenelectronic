@@ -4,7 +4,6 @@
   "description": "xenElectronic mono repository which consists of react front-end and express back-end.",
   "main": "index.js",
   "scripts": {
-    "prestart": "npm run install",
     "start:build-ui": "cd ui && npm run build",
     "start:api": "cd api && npm start",
     "start": "npm run start:build-ui && npm run start:api",
