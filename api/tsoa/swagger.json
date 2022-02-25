@@ -5,7 +5,70 @@
 		"parameters": {},
 		"requestBodies": {},
 		"responses": {},
-		"schemas": {},
+		"schemas": {
+			"IRoutes": {
+				"properties": {
+					"path": {
+						"type": "string"
+					},
+					"stack": {
+						"items": {
+							"properties": {
+								"method": {
+									"type": "string"
+								},
+								"regexp": {
+									"properties": {
+										"fast_slash": {
+											"type": "boolean"
+										},
+										"fast_star": {
+											"type": "boolean"
+										}
+									},
+									"required": [
+										"fast_slash",
+										"fast_star"
+									],
+									"type": "object"
+								},
+								"keys": {
+									"items": {
+										"type": "string"
+									},
+									"type": "array"
+								},
+								"name": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"method",
+								"regexp",
+								"keys",
+								"name"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					},
+					"methods": {
+						"properties": {},
+						"additionalProperties": {
+							"type": "boolean"
+						},
+						"type": "object"
+					}
+				},
+				"required": [
+					"path",
+					"stack",
+					"methods"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
 		"securitySchemes": {}
 	},
 	"info": {
@@ -203,7 +266,9 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"$ref": "#/components/schemas/IRoutes"
+								}
 							}
 						}
 					}

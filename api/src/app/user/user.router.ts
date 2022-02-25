@@ -1,3 +1,8 @@
+/* User router
+ * Originally written by Prawira Genestonlia
+ * Created on 25 Feb 2022
+ */
+
 import { Body, Controller, Delete, Get, Post, Put, Query, Route, Tags } from 'tsoa';
 import { getAllUser, createUser, updateUser, deleteUser } from './user.service';
 

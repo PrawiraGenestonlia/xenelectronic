@@ -1,10 +1,26 @@
+/* Server Status service
+ * Originally written by Prawira Genestonlia
+ * Created on 25 Feb 2022
+ */
+
 import app from '../../app';
 
+export interface IRoutes {
+  path: string,
+  stack: Array<{
+    name: string,
+    keys: Array<string>,
+    regexp: { fast_star: boolean, fast_slash: boolean },
+    method: string
+  }>,
+  methods: { [index: string]: boolean }
+}[]
+
 export const getRoutes = () => {
-  return new Promise<Array<any>>((resolve, reject) => {
+  return new Promise<IRoutes>((resolve, reject) => {
     try {
       let route: any;
-      const routes: Array<any> = [];
+      const routes: any = [];
       app._router.stack.forEach((middleware: any) => {
         if (middleware.route) { // routes registered directly on the app
           routes.push(middleware.route);

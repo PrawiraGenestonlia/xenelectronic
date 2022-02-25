@@ -34,8 +34,12 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'productio
 
 RegisterRoutes(app);
 
-app.use("/docs", swaggerUi.serve, async (req: express.Request, res: express.Response) => {
-  return res.send(swaggerUi.generateHTML(await import("../tsoa/swagger.json")));
+app.get('/', async (req: express.Request, res: express.Response) => {
+  return res.redirect('/docs');
+});
+
+app.use('/docs', swaggerUi.serve, async (req: express.Request, res: express.Response) => {
+  return res.send(swaggerUi.generateHTML(await import('../tsoa/swagger.json')));
 });
 
 /************************************************************************************
@@ -46,7 +50,7 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
   if (err instanceof ValidateError) {
     console.error(`Caught Validation Error for ${req.path}:`, err.fields);
     return res.status(422).json({
-      message: "Validation Failed",
+      message: 'Validation Failed',
       details: err?.fields,
     });
   }
@@ -61,7 +65,7 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 });
 
 app.use(function notFoundHandler(_req, res: express.Response) {
-  return res.status(404).send({ message: "Not Found" });
+  return res.status(404).send({ message: 'Not Found' });
 });
 
 export default app;

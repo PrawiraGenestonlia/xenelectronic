@@ -1,3 +1,8 @@
+/* User service
+ * Originally written by Prawira Genestonlia
+ * Created on 25 Feb 2022
+ */
+
 import { Role } from '@entity/role';
 import { User } from '@entity/user';
 
@@ -40,7 +45,7 @@ export const createUser = async ({ email, roles }: { email: string, roles: strin
 export const updateUser = async ({ id, email, roles }: { id: number, email: string, roles: string[] }) => {
   try {
     const _updatedUser = await User.findOne({ where: { id }, relations: ['roles'] });
-    if (!_updatedUser) return { message: "User is not found!" };
+    if (!_updatedUser) return { message: 'User is not found!' };
     _updatedUser['email'] = email;
     await Promise.all(_updatedUser['roles']?.map(async (_role) => {
       try {
