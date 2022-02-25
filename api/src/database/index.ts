@@ -24,7 +24,12 @@ class Database {
         __dirname + '/entity/*.js'
       ],
       synchronize: true,
-      logging: false
+      logging: false,
+      extra: {
+        ssl: {
+          rejectUnauthorized: false
+        }
+      }
     }).then(_con => {
       this.connection = _con;
       console.log('Connected to db!!');
