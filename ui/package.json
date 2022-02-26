@@ -26,6 +26,8 @@
     "dev": "react-scripts start",
     "build": "cross-env DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "test": "react-scripts test",
+    "coverage": "react-scripts test --coverage --watchAll=false",
+    "postcoverage": "node ./scripts/openCoverage.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

@@ -8,9 +8,18 @@ function App() {
   const [serverStatus, setServerStatus] = useState('');
 
   useEffect(() => {
-    axios.get('/api/server-status').then((res) => {
-      setServerStatus(JSON.stringify(res.data));
-    }).catch(console.error);
+    const getData = async () => {
+      try {
+        const res = await axios.get('/api/server-status');
+        setServerStatus(res.data);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    getData();
+    // axios.get('/api/server-status').then((res) => {
+    //   setServerStatus(JSON.stringify(res.data));
+    // }).catch(console.error);
   }, []);
 
   return (
