@@ -90,19 +90,16 @@ This is the project structure.
 - images               
 - ui                    //ui web application
   .gitignore
+  checklist.md
   package-lock.json
   package.json
   Procfile
   README.md
 ```
 
-## Contributing
+### Database Entity-Relationship Diagram
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+![ER](images/er.png?raw=true "ER")
 
 ## Authors
 

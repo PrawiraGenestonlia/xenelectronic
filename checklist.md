@@ -2,13 +2,13 @@
 
 ### Documentation
 
-- [ ] Good git practice
+- [x] Good git practice
 - [x] Swagger (by auto-generating openAPI spec)
 
 ### Application Development
 
-- [ ] REST APIs
-- [ ] Responsive Web App
+- [x] REST APIs
+- [x] Responsive Web App
 - [ ] Unit Testing for back-end
 - [ ] Unit Testing for front-end
 - [ ] Front-End code coverage of 80%
@@ -25,6 +25,6 @@
 
 ### Security
 
-- [ ] non SQL Injection 
+- [x] non SQL Injection 
 - [ ] JWT Token
 - [x] Deployment to heroku
