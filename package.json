@@ -13,7 +13,13 @@
     "install:api": "cd api && npm i --production=false",
     "install:ui": "cd ui && npm i --production=false",
     "install": "npm run install:api && npm run install:ui",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "coverage:api": "cd api && npm run coverage",
+    "coverage:ui": "cd ui && npm run coverage",
+    "coverage": "npm run coverage:api && npm run coverage:ui",
+    "test:api": "cd api && npm run test",
+    "test:ui": "cd ui && npm run test",
+    "test": "npm run test:api && npm run test:ui",
+    "linting": "eslint . --ext .ts,.tsx"
   },
   "repository": {
     "type": "git",
@@ -32,12 +38,19 @@
   },
   "homepage": "https://github.com/PrawiraGenestonlia/xenelectronic#readme",
   "dependencies": {
-    "concurrently": "^7.0.0"
+    "child_process": "^1.0.2",
+    "concurrently": "^7.0.0",
+    "nyc": "^15.1.0"
   },
   "devDependencies": {
     "eslint": "^8.9.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-react": "^7.29.0"
-  }
+    "eslint-plugin-react": "^7.29.0",
+    "git-pre-push": "^0.0.5"
+  },
+  "pre-push": [
+    "linting",
+    "test"
+  ]
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* Server Status service
  * Originally written by Prawira Genestonlia
  * Created on 25 Feb 2022
