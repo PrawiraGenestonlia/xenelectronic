@@ -6,3 +6,5 @@ db.sqlite
 
 src/app/.notes
 
+.nyc_output
+coverage
