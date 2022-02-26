@@ -21,7 +21,8 @@
     ],
     "rules": {
         "semi": ["error", "always"],
-        "space-before-function-paren": ["error", "never"],
-        "react/jsx-key": ["off"]
+        "space-before-function-paren": ["off"],
+        "react/jsx-key": ["off"],
+        "react/react-in-jsx-scope": ["off"]
     }
 }

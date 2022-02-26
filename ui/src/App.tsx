@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import { Link } from 'react-router-dom';
 import './styles/app.css';
@@ -8,9 +8,15 @@ function App() {
   const [serverStatus, setServerStatus] = useState('');
 
   useEffect(() => {
-    axios.get('/api/server-status').then((res) => {
-      setServerStatus(JSON.stringify(res.data));
-    }).catch(console.error);
+    const getData = async () => {
+      try {
+        const res = await axios.get('/api/server-status');
+        setServerStatus(JSON.stringify(res.data));
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    getData();
   }, []);
 
   return (
