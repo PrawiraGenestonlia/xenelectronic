@@ -3,30 +3,35 @@
  * Created on 25 Feb 2022
  */
 
-import { Body, Controller, Delete, Get, Post, Put, Query, Route, Tags } from 'tsoa';
-import { getAllUser, createUser, updateUser, deleteUser } from './user.service';
+import { Body, Controller, Delete, Get, Post, Put, Path, Route, Tags } from 'tsoa';
+import { getAllUser, getUser, createUser, updateUser, deleteUser } from './user.service';
 
-@Tags('User Permission')
-@Route('/api/user-permission')
-export class UserPermissionController extends Controller {
+@Tags('User')
+@Route('/api/user')
+export class UserController extends Controller {
 
-  @Get('/get-all/')
+  @Get('/get/')
   public async getAllUser() {
     return getAllUser()
   }
 
+  @Get('/get/{name}')
+  public async getUser(@Path('name') name: string) {
+    return getUser(name)
+  }
+
   @Post('/create/')
-  public async createUser(@Body() body: { email: string, roles: string[] }) {
-    return createUser({ email: body.email, roles: body.roles });
+  public async createUser(@Body() body: { name: string, roles: string[] }) {
+    return createUser({ name: body.name, roles: body.roles });
   }
 
   @Put('/update/{id}/')
-  public async updateUser(@Query('id') id: string, @Body() body: { email: string, roles: string[] }) {
-    return updateUser({ id: Number(id), email: body.email, roles: body.roles });
+  public async updateUser(@Path('id') id: string, @Body() body: { name: string, roles: string[] }) {
+    return updateUser({ id: Number(id), name: body.name, roles: body.roles });
   }
 
   @Delete('/delete/{id}/')
-  public async deleteUser(@Query('id') id: string) {
+  public async deleteUser(@Path('id') id: string) {
     return deleteUser({ id: Number(id) });
   }
 

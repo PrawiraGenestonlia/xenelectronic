@@ -8,17 +8,25 @@ import { User } from '@entity/user';
 
 export const getAllUser = async () => {
   try {
-    return await User.find({ relations: ['roles'] });
+    return await User.find({ relations: ['roles', 'carts'] });
   } catch (e) {
     console.error(e);
   }
 }
 
-export const createUser = async ({ email, roles }: { email: string, roles: string[] }) => {
+
+export const getUser = async (name: string) => {
+  try {
+    return await User.find({ where: { name }, relations: ['roles', 'carts'] });
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export const createUser = async ({ name, roles }: { name: string, roles: string[] }) => {
   try {
     const _newUser = new User();
-    _newUser['email'] = email;
-    // _newUser.roles = newRoles;
+    _newUser['name'] = name;
     await _newUser.save();
 
     await Promise.all(roles.map(async (_role) => {
@@ -33,8 +41,8 @@ export const createUser = async ({ email, roles }: { email: string, roles: strin
     }));
 
     return await User.findOne({
-      where: { email: email },
-      relations: ['roles']
+      where: { name: name },
+      relations: ['roles', 'carts']
     });
 
   } catch (e) {
@@ -42,11 +50,11 @@ export const createUser = async ({ email, roles }: { email: string, roles: strin
   }
 }
 
-export const updateUser = async ({ id, email, roles }: { id: number, email: string, roles: string[] }) => {
+export const updateUser = async ({ id, name, roles }: { id: number, name: string, roles: string[] }) => {
   try {
     const _updatedUser = await User.findOne({ where: { id }, relations: ['roles'] });
     if (!_updatedUser) return { message: 'User is not found!' };
-    _updatedUser['email'] = email;
+    _updatedUser['name'] = name;
     await Promise.all(_updatedUser['roles']?.map(async (_role) => {
       try {
         return _role.remove();
@@ -68,7 +76,7 @@ export const updateUser = async ({ id, email, roles }: { id: number, email: stri
     }));
 
     return await User.findOne({
-      where: { email: email },
+      where: { name: name },
       relations: ['roles']
     });
 

@@ -3,7 +3,7 @@
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { UserPermissionController } from './../src/app/user/user.router';
+import { UserController } from './../src/app/user/user.router';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ServerStatusController } from './../src/app/server-status/server-status.router';
 import * as express from 'express';
@@ -31,9 +31,9 @@ export function RegisterRoutes(app: express.Router) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-        app.get('/api/user-permission/get-all',
+        app.get('/api/user/get',
 
-            function UserPermissionController_getAllUser(request: any, response: any, next: any) {
+            function UserController_getAllUser(request: any, response: any, next: any) {
             const args = {
             };
 
@@ -43,7 +43,7 @@ export function RegisterRoutes(app: express.Router) {
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
 
-                const controller = new UserPermissionController();
+                const controller = new UserController();
 
 
               const promise = controller.getAllUser.apply(controller, validatedArgs as any);
@@ -53,11 +53,11 @@ export function RegisterRoutes(app: express.Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/api/user-permission/create',
+        app.get('/api/user/get/:name',
 
-            function UserPermissionController_createUser(request: any, response: any, next: any) {
+            function UserController_getUser(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"roles":{"dataType":"array","array":{"dataType":"string"},"required":true},"email":{"dataType":"string","required":true}}},
+                    name: {"in":"path","name":"name","required":true,"dataType":"string"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -66,7 +66,30 @@ export function RegisterRoutes(app: express.Router) {
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
 
-                const controller = new UserPermissionController();
+                const controller = new UserController();
+
+
+              const promise = controller.getUser.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/api/user/create',
+
+            function UserController_createUser(request: any, response: any, next: any) {
+            const args = {
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"roles":{"dataType":"array","array":{"dataType":"string"},"required":true},"name":{"dataType":"string","required":true}}},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new UserController();
 
 
               const promise = controller.createUser.apply(controller, validatedArgs as any);
@@ -76,12 +99,12 @@ export function RegisterRoutes(app: express.Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/api/user-permission/update/:id',
+        app.put('/api/user/update/:id',
 
-            function UserPermissionController_updateUser(request: any, response: any, next: any) {
+            function UserController_updateUser(request: any, response: any, next: any) {
             const args = {
-                    id: {"in":"query","name":"id","required":true,"dataType":"string"},
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"roles":{"dataType":"array","array":{"dataType":"string"},"required":true},"email":{"dataType":"string","required":true}}},
+                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"roles":{"dataType":"array","array":{"dataType":"string"},"required":true},"name":{"dataType":"string","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -90,7 +113,7 @@ export function RegisterRoutes(app: express.Router) {
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
 
-                const controller = new UserPermissionController();
+                const controller = new UserController();
 
 
               const promise = controller.updateUser.apply(controller, validatedArgs as any);
@@ -100,11 +123,11 @@ export function RegisterRoutes(app: express.Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.delete('/api/user-permission/delete/:id',
+        app.delete('/api/user/delete/:id',
 
-            function UserPermissionController_deleteUser(request: any, response: any, next: any) {
+            function UserController_deleteUser(request: any, response: any, next: any) {
             const args = {
-                    id: {"in":"query","name":"id","required":true,"dataType":"string"},
+                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -113,7 +136,7 @@ export function RegisterRoutes(app: express.Router) {
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
 
-                const controller = new UserPermissionController();
+                const controller = new UserController();
 
 
               const promise = controller.deleteUser.apply(controller, validatedArgs as any);

@@ -76,7 +76,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/api/user-permission/get-all": {
+		"/api/user/get": {
 			"get": {
 				"operationId": "GetAllUser",
 				"responses": {
@@ -90,13 +90,42 @@
 					}
 				},
 				"tags": [
-					"User Permission"
+					"User"
 				],
 				"security": [],
 				"parameters": []
 			}
 		},
-		"/api/user-permission/create": {
+		"/api/user/get/{name}": {
+			"get": {
+				"operationId": "GetUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "name",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/user/create": {
 			"post": {
 				"operationId": "CreateUser",
 				"responses": {
@@ -110,7 +139,7 @@
 					}
 				},
 				"tags": [
-					"User Permission"
+					"User"
 				],
 				"security": [],
 				"parameters": [],
@@ -126,13 +155,13 @@
 										},
 										"type": "array"
 									},
-									"email": {
+									"name": {
 										"type": "string"
 									}
 								},
 								"required": [
 									"roles",
-									"email"
+									"name"
 								],
 								"type": "object"
 							}
@@ -141,7 +170,7 @@
 				}
 			}
 		},
-		"/api/user-permission/update/{id}": {
+		"/api/user/update/{id}": {
 			"put": {
 				"operationId": "UpdateUser",
 				"responses": {
@@ -155,12 +184,12 @@
 					}
 				},
 				"tags": [
-					"User Permission"
+					"User"
 				],
 				"security": [],
 				"parameters": [
 					{
-						"in": "query",
+						"in": "path",
 						"name": "id",
 						"required": true,
 						"schema": {
@@ -180,13 +209,13 @@
 										},
 										"type": "array"
 									},
-									"email": {
+									"name": {
 										"type": "string"
 									}
 								},
 								"required": [
 									"roles",
-									"email"
+									"name"
 								],
 								"type": "object"
 							}
@@ -195,7 +224,7 @@
 				}
 			}
 		},
-		"/api/user-permission/delete/{id}": {
+		"/api/user/delete/{id}": {
 			"delete": {
 				"operationId": "DeleteUser",
 				"responses": {
@@ -209,12 +238,12 @@
 					}
 				},
 				"tags": [
-					"User Permission"
+					"User"
 				],
 				"security": [],
 				"parameters": [
 					{
-						"in": "query",
+						"in": "path",
 						"name": "id",
 						"required": true,
 						"schema": {
