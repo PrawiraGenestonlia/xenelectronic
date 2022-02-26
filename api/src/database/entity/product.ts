@@ -26,13 +26,13 @@ export class Product extends BaseEntity {
   @Column()
   postedDate: Date;
 
-  @Column()
+  @Column({ type: 'float' })
   price: number;
 
   @Column({ default: true })
   isAvailable: boolean;
 
-  @Column({ nullable: true, default: null })
+  @Column({ type: 'float', nullable: true, default: null })
   discountPercentage: number;
 
   @Column({ nullable: true, default: null })
