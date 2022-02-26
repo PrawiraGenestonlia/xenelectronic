@@ -1,4 +1,4 @@
-/* User service
+/* Users service
  * Originally written by Prawira Genestonlia
  * Created on 25 Feb 2022
  */

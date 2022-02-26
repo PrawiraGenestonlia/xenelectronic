@@ -6,6 +6,75 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"ICategory": {
+				"properties": {
+					"categoryName": {
+						"type": "string"
+					},
+					"categoryDescription": {
+						"type": "string"
+					},
+					"categoryImageUrl": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"categoryName",
+					"categoryDescription",
+					"categoryImageUrl"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IProduct": {
+				"properties": {
+					"categoryName": {
+						"type": "string"
+					},
+					"productName": {
+						"type": "string"
+					},
+					"previewImageUrl": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"postedDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"price": {
+						"type": "number",
+						"format": "double"
+					},
+					"isAvailable": {
+						"type": "boolean"
+					},
+					"discountPercentage": {
+						"type": "number",
+						"format": "double"
+					},
+					"discountEndDate": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
+					}
+				},
+				"required": [
+					"categoryName",
+					"productName",
+					"previewImageUrl",
+					"description",
+					"postedDate",
+					"price",
+					"isAvailable",
+					"discountPercentage",
+					"discountEndDate"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IRoutes": {
 				"properties": {
 					"path": {
@@ -76,7 +145,322 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/api/user/get": {
+		"/api/categories": {
+			"get": {
+				"operationId": "GetAllCategories",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Categories"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Categories"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICategory"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/categories/{categoryName}": {
+			"get": {
+				"operationId": "GetCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Categories"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "categoryName",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/categories/{id}": {
+			"put": {
+				"operationId": "UpdateCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Categories"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICategory"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Categories"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/products": {
+			"get": {
+				"operationId": "GetAllProducts",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Products"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateProduct",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Products"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IProduct"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/products/{productName}": {
+			"get": {
+				"operationId": "GetProduct",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Products"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "productName",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/products/category/{categoryName}": {
+			"get": {
+				"operationId": "GetAllProductsFromACategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Products"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "categoryName",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/products/{id}": {
+			"put": {
+				"operationId": "UpdateProduct",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Products"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IProduct"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteProduct",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Products"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/users": {
 			"get": {
 				"operationId": "GetAllUser",
 				"responses": {
@@ -90,42 +474,11 @@
 					}
 				},
 				"tags": [
-					"User"
+					"Users"
 				],
 				"security": [],
 				"parameters": []
-			}
-		},
-		"/api/user/get/{name}": {
-			"get": {
-				"operationId": "GetUser",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {}
-							}
-						}
-					}
-				},
-				"tags": [
-					"User"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "name",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
-			}
-		},
-		"/api/user/create": {
+			},
 			"post": {
 				"operationId": "CreateUser",
 				"responses": {
@@ -139,7 +492,7 @@
 					}
 				},
 				"tags": [
-					"User"
+					"Users"
 				],
 				"security": [],
 				"parameters": [],
@@ -170,7 +523,36 @@
 				}
 			}
 		},
-		"/api/user/update/{id}": {
+		"/api/users/{name}": {
+			"get": {
+				"operationId": "GetUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "name",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/users/{id}": {
 			"put": {
 				"operationId": "UpdateUser",
 				"responses": {
@@ -184,7 +566,7 @@
 					}
 				},
 				"tags": [
-					"User"
+					"Users"
 				],
 				"security": [],
 				"parameters": [
@@ -222,9 +604,7 @@
 						}
 					}
 				}
-			}
-		},
-		"/api/user/delete/{id}": {
+			},
 			"delete": {
 				"operationId": "DeleteUser",
 				"responses": {
@@ -238,7 +618,7 @@
 					}
 				},
 				"tags": [
-					"User"
+					"Users"
 				],
 				"security": [],
 				"parameters": [

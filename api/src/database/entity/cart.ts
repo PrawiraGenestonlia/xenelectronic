@@ -11,7 +11,7 @@ export class Cart extends BaseEntity {
   @ManyToOne(() => User, (users: User) => users.roles, { onDelete: 'CASCADE' })
   user: User;
 
-  @ManyToOne(() => Product, (products: Product) => products.id, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Product, (products) => products.id, { onDelete: 'CASCADE' })
   product: Product;
 
 }

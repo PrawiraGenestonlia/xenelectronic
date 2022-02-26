@@ -10,10 +10,10 @@ export class User extends BaseEntity {
   @Column({ unique: true })
   name: string;
 
-  @OneToMany(() => Role, (role: Role) => role.user, { onDelete: 'CASCADE' })
+  @OneToMany(() => Role, (role) => role.user, { onDelete: 'CASCADE' })
   roles: Role[];
 
-  @OneToMany(() => Cart, (cart: Cart) => cart.product, { onDelete: 'CASCADE' })
+  @OneToMany(() => Cart, (cart) => cart.product, { onDelete: 'CASCADE' })
   carts: Cart[];
 
 }

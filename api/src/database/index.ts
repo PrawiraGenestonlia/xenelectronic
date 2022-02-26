@@ -1,4 +1,5 @@
 import { Connection, createConnection } from 'typeorm';
+import { seeding } from './seeding';
 import dotenv from 'dotenv';
 
 dotenv.config({});
@@ -33,6 +34,9 @@ class Database {
     }).then(_con => {
       this.connection = _con;
       console.log('Connected to db!!');
+      if (process.env.NODE_ENV !== 'test') {
+        seeding();
+      }
     }).catch(console.error)
   }
 

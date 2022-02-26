@@ -10,7 +10,7 @@ export class Role extends BaseEntity {
   @Column()
   role: string;
 
-  @ManyToOne(() => User, (user: User) => user.roles, { onDelete: 'CASCADE' })
+  @ManyToOne(() => User, (user) => user.roles, { onDelete: 'CASCADE' })
   user: User;
 
 }

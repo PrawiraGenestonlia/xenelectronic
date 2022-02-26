@@ -8,10 +8,10 @@ export class Product extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Category, (categories: Category) => categories.categoryName, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Category, (categories) => categories.products, { onDelete: 'CASCADE' })
   categoryName: Category;
 
-  @OneToMany(() => Cart, (carts: Cart) => carts.id, { onDelete: 'CASCADE' })
+  @OneToMany(() => Cart, (carts) => carts.id, { onDelete: 'CASCADE' })
   carts: Cart;
 
   @Column({ unique: true, length: 255 })
