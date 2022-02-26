@@ -6,17 +6,18 @@ import { db } from '@database';
 
 chai.use(chaiHttp);
 
-describe('/GET user', async () => {
+describe('[GET] /api/user-permission/get-all', async () => {
 
-  await db.connectToDB();
-  it('it should GET all the users', (done) => {
-    chai.request(app)
-      .get('/api/user-permission/get-all')
-      .end((err, res) => {
-        expect(res.status).to.be.oneOf([200, 204]);
-        // res.body.should.be.a('array');
-        // res.body.length.should.be.eql(0);
-        done();
-      });
+  it('it should get all users', (done) => {
+    db.connectToDB().then(() => {
+      chai.request(app)
+        .get('/api/user-permission/get-all')
+        .end((err, res) => {
+          expect(res.status).to.be.oneOf([200, 204]);
+          expect(res.body).to.be.a('array');
+          done();
+        });
+    });
   });
+
 });

@@ -11,27 +11,28 @@ class Database {
   }
 
   public async connectToDB(): Promise<void> {
-    const _con = await createConnection({
-      type: envString('postgres', 'sqlite'),
-      database: envString(process.env.DATABASE_NAME || '', './db.sqlite'),
-      url: envString(process.env.DATABASE_URL || '', ''),
-      entities: [
-        __dirname + '/entity/*.ts',
-        __dirname + '/entity/*.js'
-      ],
-      synchronize: true,
-      logging: false,
-      extra: {
-        ssl: {
-          rejectUnauthorized: false
+    if (!this.connection) {
+      const _con = await createConnection({
+        type: envString('postgres', 'sqlite'),
+        database: envString(process.env.DATABASE_NAME || '', './db.sqlite'),
+        url: envString(process.env.DATABASE_URL || '', ''),
+        entities: [
+          __dirname + '/entity/*.ts',
+          __dirname + '/entity/*.js'
+        ],
+        synchronize: true,
+        logging: false,
+        extra: {
+          ssl: {
+            rejectUnauthorized: false
+          }
         }
+      }).catch(console.error);
+      if (_con) {
+        this.connection = _con;
+        console.log('Connected to db!!');
       }
-    }).catch(console.error);
-    if (_con) {
-      this.connection = _con;
-      console.log('Connected to db!!');
     }
-
   }
 
 }
