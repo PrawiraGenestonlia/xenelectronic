@@ -4,7 +4,6 @@
   "description": "XenElectronic API",
   "main": "src/index.ts",
   "scripts": {
-    "prestart": "npm run build",
     "start": "node -r ./tspaths ./build/src/index.js",
     "start:dev": "nodemon -w src -e ts -r tsconfig-paths/register --exec ts-node ./src/index.ts",
     "dev": "concurrently -p \"[{name}] - \" -n \"TSOA,APP \"  \"npm run tsoa:generate_\" \"npm run start:dev\" ",
