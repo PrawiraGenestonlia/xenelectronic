@@ -1,10 +1,14 @@
 import { all } from 'redux-saga/effects';
-import cartSaga from './cart/cart.saga';
-import userSaga from './user/user.saga';
+import cartSaga from './carts/cart.saga';
+import userSaga from './users/user.saga';
+import categoriesSaga from './categories/categories.saga';
+import productsSaga from './products/products.saga';
 
 const listOfSagas = [
   cartSaga,
-  userSaga
+  userSaga,
+  categoriesSaga,
+  productsSaga
 ];
 
 export default function* rootSaga() {

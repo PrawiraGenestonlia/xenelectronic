@@ -13,13 +13,13 @@ export default function NavBar() {
   const location = useLocation();
   const [navigation, setNavigation] = useState([
     { name: 'Home', href: '/home', current: false },
-    { name: 'All Products', href: '/products', current: false },
+    { name: 'Products', href: '/products', current: false },
     { name: 'My Cart', href: '/cart', current: false }
   ]);
 
   useEffect(() => {
     setNavigation([...navigation.map(item => {
-      if (item.href === location.pathname) {
+      if (location.pathname.includes(item.href)) {
         return { ...item, current: true };
       } else {
         return item;
@@ -66,7 +66,7 @@ export default function NavBar() {
                         key={item.name}
                         onClick={() => navigate(item.href)}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          item.current ? 'bg-gray-900 text-white cursor-pointer' : ' cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}

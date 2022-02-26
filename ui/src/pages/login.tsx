@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector, RootState } from '../hooks/useRedux';
-import { apiRequest } from '../redux/user/user.slice';
+import { apiRequest } from '../redux/users/user.slice';
 
 export const LoginPage = () => {
   const navigate = useNavigate();

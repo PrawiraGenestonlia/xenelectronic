@@ -1,19 +1,19 @@
 import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IAPI } from './user.api';
+import { IAPI } from './categories.api';
 
-export interface CartState {
+export interface CategoriesState {
   status: 'idle' | 'loading' | 'failed',
   error: string,
   [index: string]: any;
 }
 
-const initialState: CartState = {
+const initialState: CategoriesState = {
   status: 'idle',
   error: ''
 };
 
-export const userSlice = createSlice({
-  name: 'user',
+export const categoriesSlice = createSlice({
+  name: 'categories',
   initialState,
   reducers: {
     apiRequest: (state, action: PayloadAction<{ key: IAPI, query?: Object, body?: Object, path?: Object }>) => {
@@ -32,6 +32,6 @@ export const userSlice = createSlice({
   }
 });
 
-export const { apiRequest, apiResponse, apiError } = userSlice.actions;
+export const { apiRequest, apiResponse, apiError } = categoriesSlice.actions;
 
-export default userSlice.reducer;
+export default categoriesSlice.reducer;

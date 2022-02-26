@@ -5,6 +5,7 @@ import { HomePage } from '../pages/home';
 import { ProductPage } from '../pages/products';
 import { CartPage } from '../pages/carts';
 import { ProfilePage } from '../pages/my-profile';
+import { PaymentPage } from '../pages/payment';
 
 export default function Router() {
   const getName = () => localStorage.getItem('xenName') || '';
@@ -16,8 +17,10 @@ export default function Router() {
         <Route path="/login" element={getName() ? <Navigate replace to="/home" /> : <LoginPage />} />
         <Route path="/home" element={getName() ? <HomePage /> : <Navigate replace to="/login" />} />
         <Route path="/products" element={getName() ? <ProductPage /> : <Navigate replace to="/login" />} />
+        <Route path="/products/:categoryName" element={getName() ? <ProductPage /> : <Navigate replace to="/login" />} />
         <Route path="/cart" element={getName() ? <CartPage /> : <Navigate replace to="/login" />} />
         <Route path="/my-profile" element={getName() ? <ProfilePage /> : <Navigate replace to="/login" />} />
+        <Route path="/payment" element={getName() ? <PaymentPage /> : <Navigate replace to="/login" />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,19 +1,30 @@
-/* eslint-disable no-unused-vars */
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector, RootState } from '../hooks/useRedux';
-import { apiRequest } from '../redux/user/user.slice';
+import { apiRequest } from '../redux/categories/categories.slice';
 import Layout from '../components/layout';
+import CategoryCard from '../components/categoryCard';
+import { Link } from 'react-router-dom';
 
 export const HomePage = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { login } = useAppSelector((state: RootState) => state.user);
+  const { getAllCategories } = useAppSelector((state: RootState) => state.categories);
+
+  useEffect(() => {
+    !getAllCategories && dispatch(apiRequest({
+      key: 'getAllCategories'
+    }));
+  }, [dispatch]);
 
   return (
     <Layout>
-      <div className="h-screen m-4">
-        HomePage
+      <div className="m-4">
+        <div className='flex flex-wrap items-center justify-center'>
+          {
+            Array.isArray(getAllCategories) && getAllCategories.map((item) =>
+              <Link to={`/products/${item.categoryName}`} key={item.categoryName}><CategoryCard category={item} /></Link>
+            )
+          }
+        </div>
       </div>
     </Layout>
 

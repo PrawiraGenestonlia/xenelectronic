@@ -4,14 +4,15 @@ import ReactDOM from 'react-dom';
 import RouterApp from './routers';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-
 import reportWebVitals from './reportWebVitals';
+import { ToastContainer } from 'react-toastify';
 import './styles/index.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store.store}>
       <RouterApp />
+      <ToastContainer />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
