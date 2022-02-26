@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector, RootState } from '../hooks/useRedux';
 import { apiRequest } from '../redux/user/user.slice';
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { login } = useAppSelector((state: RootState) => state.user);
+  const { login, status } = useAppSelector((state: RootState) => state.user);
   const onLogin = (e: any) => {
     e.preventDefault();
     dispatch(apiRequest({
@@ -14,7 +16,10 @@ export const LoginPage = () => {
   };
 
   useEffect(() => {
-    console.log(login);
+    if (login && login.name) {
+      localStorage.setItem('xenName', login.name);
+      window.location.href = '/';
+    }
   }, [login]);
 
   return (
@@ -28,7 +33,7 @@ export const LoginPage = () => {
               alt="Workflow"
             />
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
+            <p className="mt-2 text-center text-sm text-gray-600" onClick={(e) => navigate('/home')}>
               For this MVP, no password is required.
             </p>
           </div>
@@ -45,9 +50,11 @@ export const LoginPage = () => {
                   type="text"
                   autoComplete="name"
                   required
+                  pattern="[a-zA-Z0-9]+"
                   className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Name"
                 />
+                <p className='text-xs mt-2 flex justify-end items-end text-gray-500'>Only alphanumeric format</p>
               </div>
 
             </div>
@@ -59,12 +66,12 @@ export const LoginPage = () => {
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 </span>
-                Login
+                {status === 'loading' ? 'Logging in...' : 'Login'}
               </button>
             </div>
           </form>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
