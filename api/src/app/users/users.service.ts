@@ -17,7 +17,7 @@ export const getAllUser = async () => {
 
 export const getUser = async (name: string) => {
   try {
-    return await User.find({ where: { name }, relations: ['roles', 'carts'] });
+    return await User.findOne({ where: { name }, relations: ['roles', 'carts'] });
   } catch (e) {
     console.error(e);
   }
@@ -87,8 +87,21 @@ export const updateUser = async ({ id, name, roles }: { id: number, name: string
 
 export const deleteUser = async ({ id }: { id: number }) => {
   try {
-    const foundUser = await User.findOne({ id: id });
+    const foundUser = await User.findOne({ where: { id: id } });
     return await foundUser?.remove();
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export const login = async (name: string) => {
+  try {
+    const _foundUser = await User.findOne({ where: { name }, relations: ['roles', 'carts'] });
+    if (_foundUser) {
+      return _foundUser;
+    } else {
+      return await createUser({ name: name, roles: ['user'] })
+    }
   } catch (e) {
     console.error(e);
   }

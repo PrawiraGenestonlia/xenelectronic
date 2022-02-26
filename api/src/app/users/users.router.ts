@@ -4,7 +4,7 @@
  */
 
 import { Body, Controller, Delete, Get, Post, Put, Path, Route, Tags } from 'tsoa';
-import { getAllUser, getUser, createUser, updateUser, deleteUser } from './users.service';
+import { getAllUser, getUser, createUser, updateUser, deleteUser, login } from './users.service';
 
 @Tags('Users')
 @Route('/api/users')
@@ -33,6 +33,11 @@ export class UserController extends Controller {
   @Delete('/{id}')
   public async deleteUser(@Path('id') id: string) {
     return deleteUser({ id: Number(id) });
+  }
+
+  @Post('/login')
+  public async login(@Body() body: { name: string }) {
+    return login(body.name);
   }
 
 }
