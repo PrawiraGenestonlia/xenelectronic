@@ -8,4 +8,6 @@ src/app/.notes
 
 .nyc_output
 coverage
+tsoa/routes.ts
+tsoa/swagger.json
 
