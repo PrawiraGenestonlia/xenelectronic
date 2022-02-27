@@ -15,7 +15,7 @@ class Database {
     if (!this.connection) {
       const _con = await createConnection({
         type: envString('postgres', 'sqlite'),
-        database: envString(process.env.DATABASE_NAME || '', './db.sqlite'),
+        database: process.env.SEEDING_TEST === '1' ? './db.seeding.sqlite' : envString(process.env.DATABASE_NAME || '', './db.sqlite'),
         url: envString(process.env.DATABASE_URL || '', ''),
         entities: [
           __dirname + '/entity/*.ts',
