@@ -19,13 +19,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Handle logs in console during development
-if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
   app.use(cors());
-}
-
-// Handle security and origin in production
-if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'production') {
+} else {
+  // Handle security and origin in production
   app.use(helmet({
     contentSecurityPolicy: false
   }));

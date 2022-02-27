@@ -9,10 +9,10 @@
 
 - [x] REST APIs
 - [x] Responsive Web App
-- [ ] Unit Testing for back-end
+- [x] Unit Testing for back-end
 - [ ] Unit Testing for front-end
 - [ ] Front-End code coverage of 80%
-- [ ] Back-End code coverage of 80%
+- [x] Back-End code coverage of 80%
 - [x] TypeScript supported
 - [x] Monorepo with shared scripts setup
 

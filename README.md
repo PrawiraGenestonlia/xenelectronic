@@ -53,6 +53,9 @@ As the api is written in TypeScript (node.js), the following technology is used:
 * [chai](https://www.chaijs.com/) - JavaScript asserting library
 * [nyc](https://istanbul.js.org/) - Code coverage generation tool
 
+The following screenshot shows the code coverage as of 27th Feb 2022. 
+![API Code Coverage](images/api-coverage.png?raw=true "API Code Coverage")
+
 #### ui
 
 As the ui is developed using React UI Library, the following technology is used:
