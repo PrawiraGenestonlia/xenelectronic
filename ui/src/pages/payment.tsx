@@ -35,7 +35,8 @@ export const PaymentPage = () => {
       }
     }));
     toast.success('You have successfuly checkout!', {
-      position: toast.POSITION.BOTTOM_CENTER
+      position: toast.POSITION.BOTTOM_CENTER,
+      theme: 'colored'
     });
     navigate('/home');
   };

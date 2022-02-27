@@ -52,8 +52,8 @@ export const ProductPage = () => {
           </div>}
 
           <div className='flex flex-row items-center justify-end w-full'>
-            {categoryName && <button className='mr-5 p-2 bg-blue-200 rounded-xl items-end shadow-md' onClick={() => navigate('/products')}>View All Products</button>}
-            <button className='p-2 bg-blue-200 rounded-xl items-end shadow-md' onClick={() => navigate('/home')}>View Other Categories</button>
+            {categoryName && <button className='mr-5 p-2 bg-indigo-200 rounded-xl items-end shadow-md hover:bg-indigo-400' onClick={() => navigate('/products')}>View All Products</button>}
+            <button className='p-2 bg-indigo-200 rounded-xl items-end shadow-md hover:bg-indigo-400' onClick={() => navigate('/home')}>View Other Categories</button>
           </div>
         </div>
         <div className="mt-4 grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">

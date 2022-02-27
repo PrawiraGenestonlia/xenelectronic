@@ -54,14 +54,14 @@ export const CartPage = () => {
               getMyCart.map((item: any, index: number) => {
                 return <div key={index} className="sm:w-[32rem] w-[16rem]">
                   <div className="flex flex-row">
-                    <div className='w-48 h-48 p-2 bg-slate-100 sm:block hidden'>
+                    <div className='w-48 h-36 p-2 bg-slate-100 sm:block hidden'>
                       <img src={item.product.previewImageUrl} />
                     </div>
                     <div className='w-full flex-grow ml-4'>
                       <div>{item.product.productName}</div>
                     </div>
                     <div className='flex flex-col flex-grow'>
-                      <div className='h-full'>$ {(item.product.price * (1 - item.product.discountPercentage / 100)).toFixed(2)}</div>
+                      <div className='h-full w-16'>$ {(item.product.price * (1 - item.product.discountPercentage / 100)).toFixed(2)}</div>
                       <div className='text-indigo-700 cursor-pointer' onClick={() => removeProduct(item.product.productName)}>Remove</div>
                     </div>
                   </div>

@@ -108,5 +108,6 @@ This is the project structure.
 
 ## Acknowledgments
 
+* Unsplash - For all the images
 * Xendit - HR
 * David - Recruiter
