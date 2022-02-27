@@ -44,17 +44,39 @@ export const PaymentPage = () => {
   return (
     <Layout>
       <div className="m-4 flex flex-col items-center">
-        <div className='text-center'>
+        <div className='text-center m-4'>
           Thank you for shopping with us. Please make sure all items are correctly added to cart before checking out.
         </div>
+        <table className="table-auto table text-left">
+          <thead>
+            <tr>
+              <th><div>No</div></th>
+              <th><div className='ml-4'>Product</div></th>
+              <th><div className='ml-4'>Original Price</div></th>
+              <th><div className='ml-4'>Discounted Price</div></th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              Array.isArray(getMyCart) && getMyCart.map((item, i) => {
+                return (
+                  <tr key={item.product.productName}>
+                    <td>{i + 1}</td>
+                    <td><div className='ml-4'>{item.product.productName}</div></td>
+                    <td><div className='ml-4'>$ {item.product.price}</div></td>
+                    <td><div className='ml-4'>$ {(item.product.price * (1 - item.product.discountPercentage / 100)).toFixed(2)}</div></td>
+                  </tr>
+                );
+              })
+            }
+          </tbody>
+        </table>
         <button
           onClick={() => onPay()}
-          className="m-8 group relative sm:w-[32rem] w-[16rem] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          Pay $ {subtotalCalculator().toFixed()}
+          className="animate-bounce mt-12 m-8 group relative sm:w-[32rem] w-[16rem] h-12 flex items-center justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <div className=''>Pay $ {subtotalCalculator().toFixed()} with <span className='font-bold'>Xendit</span></div>
         </button>
-
       </div>
     </Layout>
-
   );
 };
