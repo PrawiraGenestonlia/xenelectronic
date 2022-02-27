@@ -9,6 +9,7 @@ As part of XenElectronic MVP, this application has the following features:
 - Customers should be able to remove the products listed on the shopping cart
 - Customers should be able to checkout shopping cart and continue their transaction to payment
 
+This project will be built using React (for front-end) and Node.js Express (for back-end). As part of a full-stack JavaScript application, TypeScript is implemented to ensure type-safety in the development phase.
 
 ## Getting Started
 
@@ -20,7 +21,7 @@ As part of XenElectronic MVP, this application has the following features:
 * [Heroku PostgreSQL](https://www.heroku.com/postgres) - for Heroku Development and Production Environment
 * [SQLite](https://www.sqlite.org/index.html) - for Local Development
 
-### Installing the roject
+### Installing the Project
 
 ``` bash
 $ git clone https://github.com/PrawiraGenestonlia/xenelectronic
@@ -101,13 +102,25 @@ This is the project structure.
 
 ![ER](images/er.png?raw=true "ER")
 
+### Data seeding
+
+To improve development productivity, the database will be seeded with necessary information if it is empty. The seeding data can be found in  `{project}/src/database/seeding/*` folder.
+
+### API Details
+
+In this MVP, a total of 24 APIs were developed. The complete API request (path, query or body) and response body schemas can be found in the swagger file. This is done through programatic generation of OpenAPI spec. To view this spec locally, you can run this project and find the file at `{project}/api/tsoa/swagger.json` path.
+
+### UI Details
+
+To improve the state management in the React UI, redux and redux-saga are implemented. This is to ensure a high level of responsiveness when user navigates from pages to pages. A detailed implementation of redux can be found in `{project}/ui/src/redux/*` folder.
+
 ## Authors
 
-* **Prawira Genestonlia** - *Lead Developer* - [Prawira](https://github.com/PrawiraGenestonlia)
+* [**Prawira Genestonlia**](https://github.com/PrawiraGenestonlia) - *Lead Developer*
             
+## Acknowledgements
 
-## Acknowledgments
-
-* Unsplash - For all the images
-* Xendit - HR
-* David - Recruiter
+* Unsplash - For categories' images
+* Alicdn = For products' images
+* Xendit - For this opportunity and problem statement
+* David - For enablement

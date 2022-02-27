@@ -61,10 +61,10 @@ export const deleteUser = async ({ id }: { id: number }) => {
 }
 
 export const login = async (name: string) => {
-  const _foundUser = await User.findOne({ where: { name }, relations: ['roles', 'carts'] });
+  const _foundUser = await User.findOne({ where: { name }, relations: ['roles'] });
   if (_foundUser) {
     return _foundUser;
   } else {
-    return await createUser({ name: name, roles: ['user', 'carts'] })
+    return await createUser({ name: name, roles: ['user'] })
   }
 }
