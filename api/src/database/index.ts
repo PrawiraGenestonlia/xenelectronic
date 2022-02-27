@@ -1,4 +1,5 @@
 import { Connection, createConnection } from 'typeorm';
+import { seeding } from './seeding';
 import dotenv from 'dotenv';
 
 dotenv.config({});
@@ -14,7 +15,7 @@ class Database {
     if (!this.connection) {
       const _con = await createConnection({
         type: envString('postgres', 'sqlite'),
-        database: envString(process.env.DATABASE_NAME || '', './db.sqlite'),
+        database: process.env.SEEDING_TEST === '1' ? './db.seeding.sqlite' : envString(process.env.DATABASE_NAME || '', './db.sqlite'),
         url: envString(process.env.DATABASE_URL || '', ''),
         entities: [
           __dirname + '/entity/*.ts',
@@ -31,6 +32,9 @@ class Database {
       if (_con) {
         this.connection = _con;
         console.log('Connected to db!!');
+        if (process.env.NODE_ENV !== 'test') {
+          seeding();
+        }
       }
     }
   }

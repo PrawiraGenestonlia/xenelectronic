@@ -1,16 +1,19 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BaseEntity } from 'typeorm';
 import { Role } from './role';
-
-@Entity({ name: 'user' })
+import { Cart } from './cart';
+@Entity({ name: 'users' })
 export class User extends BaseEntity {
 
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ unique: true })
-  email: string;
+  name: string;
 
-  @OneToMany(() => Role, (role: Role) => role.user, { onDelete: 'CASCADE' })
+  @OneToMany(() => Role, (role) => role.user, { onDelete: 'CASCADE' })
   roles: Role[];
+
+  @OneToMany(() => Cart, (cart) => cart.product, { onDelete: 'CASCADE' })
+  carts: Cart[];
 
 }
