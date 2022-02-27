@@ -9,6 +9,7 @@ const appStore = (initialState = {}) => {
   const middlewares = [sagaMiddleware];
 
   const store = configureStore({
+    preloadedState: initialState,
     reducer: rootReducer,
     middleware: [...getDefaultMiddleware({ thunk: false }), ...middlewares]
   });
@@ -16,7 +17,7 @@ const appStore = (initialState = {}) => {
   sagaMiddleware.run(rootSaga);
   return { store };
 };
-
+export const storeInit = (initialValue: any) => appStore(initialValue);
 export const store = appStore({});
 export type AppDispatch = typeof store.store.dispatch;
 export type RootState = ReturnType<typeof store.store.getState>;

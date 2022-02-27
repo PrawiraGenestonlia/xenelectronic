@@ -62,6 +62,9 @@ As the ui is developed using React UI Library, the following technology is used:
 * [react testing library](https://testing-library.com/docs/react-testing-library/intro/) - React testing library
 * [jest](https://jestjs.io/) - JavaScript testing framework
 * [nyc](https://istanbul.js.org/) - Code coverage generation tool
+
+The following screenshot shows the code coverage as of 27th Feb 2022. 
+![UI Code Coverage](images/ui-coverage.png?raw=true "UI Code Coverage")
   
 ## Deployment
 

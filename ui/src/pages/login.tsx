@@ -1,17 +1,15 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector, RootState } from '../hooks/useRedux';
 import { apiRequest } from '../redux/users/user.slice';
 
 export const LoginPage = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { login, status } = useAppSelector((state: RootState) => state.user);
   const onLogin = (e: any) => {
     e.preventDefault();
     dispatch(apiRequest({
       key: 'login',
-      body: { name: e.target[1].value }
+      body: { name: e?.target[1]?.value }
     }));
   };
 
@@ -33,7 +31,7 @@ export const LoginPage = () => {
               alt="Workflow"
             />
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
-            <p className="mt-2 text-center text-sm text-gray-600" onClick={(e) => navigate('/home')}>
+            <p className="mt-2 text-center text-sm text-gray-600">
               For this MVP, no password is required.
             </p>
           </div>
