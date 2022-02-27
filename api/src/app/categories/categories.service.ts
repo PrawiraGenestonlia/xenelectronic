@@ -12,56 +12,35 @@ export interface ICategory {
 }
 
 export const getAllCategories = async () => {
-  try {
-    return await Category.find();
-  } catch (e) {
-    console.error(e);
-  }
+  return await Category.find();
 }
 
 export const getCategory = async (categoryName: string) => {
-  try {
-    return await Category.find({ where: { categoryName }, relations: ['products'] });
-  } catch (e) {
-    console.error(e);
-  }
+  return await Category.find({ where: { categoryName }, relations: ['products'] });
 }
 
 export const createCategory = async ({ categoryName, categoryDescription, categoryImageUrl }: ICategory) => {
-  try {
-    const _newCategory = new Category();
-    _newCategory['categoryName'] = categoryName;
-    _newCategory['categoryDescription'] = categoryDescription;
-    _newCategory['categoryImageUrl'] = categoryImageUrl;
+  const _newCategory = new Category();
+  _newCategory['categoryName'] = categoryName;
+  _newCategory['categoryDescription'] = categoryDescription;
+  _newCategory['categoryImageUrl'] = categoryImageUrl;
 
-    return await _newCategory.save();
-
-  } catch (e) {
-    console.error(e);
-  }
+  return await _newCategory.save();
 }
 
 export const updateCategory = async ({ id, body }: { id: number, body: ICategory }) => {
-  try {
-    const _foundCategory = await Category.findOne({ where: { id } });
-    if (!_foundCategory) return { message: 'Category is not found!' };
+  const _foundCategory = await Category.findOne({ where: { id } });
+  if (!_foundCategory) return { message: 'Category is not found!' };
 
-    _foundCategory['categoryName'] = body.categoryName;
-    _foundCategory['categoryDescription'] = body.categoryDescription;
-    _foundCategory['categoryImageUrl'] = body.categoryImageUrl;
+  _foundCategory['categoryName'] = body.categoryName;
+  _foundCategory['categoryDescription'] = body.categoryDescription;
+  _foundCategory['categoryImageUrl'] = body.categoryImageUrl;
 
-    return await _foundCategory.save();
-
-  } catch (e) {
-    console.error(e);
-  }
+  return await _foundCategory.save();
 }
 
 export const deleteCategory = async ({ id }: { id: number }) => {
-  try {
-    const _foundCategory = await Category.findOne({ id: id });
-    return await _foundCategory?.remove();
-  } catch (e) {
-    console.error(e);
-  }
+  const _foundCategory = await Category.findOne({ id: id });
+  await _foundCategory?.remove();
+  return { message: 'Deleted.' }
 }

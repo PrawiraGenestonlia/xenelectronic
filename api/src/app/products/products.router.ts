@@ -4,6 +4,7 @@
  */
 
 import { Body, Controller, Delete, Get, Post, Put, Path, Route, Tags } from 'tsoa';
+import { ICategory } from '../categories/categories.service';
 import { IProduct, createProduct, deleteProduct, getAllProducts, getAllProductsFromACategory, getProduct, updateProduct } from './products.service';
 
 
@@ -12,32 +13,32 @@ import { IProduct, createProduct, deleteProduct, getAllProducts, getAllProductsF
 export class ProductController extends Controller {
 
   @Get('/')
-  public async getAllProducts() {
-    return getAllProducts()
+  public async getAllProducts(): Promise<Array<IProduct & { id: number, categoryName: ICategory & { id: number } }>> {
+    return getAllProducts() as never
   }
 
   @Get('/{productName}')
-  public async getProduct(@Path('productName') productName: string) {
-    return getProduct(productName)
+  public async getProduct(@Path('productName') productName: string): Promise<IProduct & { id: number, categoryName: ICategory & { id: number } }> {
+    return getProduct(productName) as never
   }
 
   @Get('/category/{categoryName}')
-  public async getAllProductsFromACategory(@Path('categoryName') categoryName: string) {
-    return getAllProductsFromACategory(categoryName)
+  public async getAllProductsFromACategory(@Path('categoryName') categoryName: string): Promise<Array<IProduct & { id: number, categoryName: ICategory & { id: number } }>> {
+    return getAllProductsFromACategory(categoryName) as never
   }
 
   @Post('/')
-  public async createProduct(@Body() body: IProduct) {
-    return createProduct(body);
+  public async createProduct(@Body() body: IProduct): Promise<IProduct & { id: number }> {
+    return createProduct(body) as never
   }
 
   @Put('/{id}')
-  public async updateProduct(@Path('id') id: string, @Body() body: IProduct) {
-    return updateProduct({ id: Number(id), body });
+  public async updateProduct(@Path('id') id: string, @Body() body: IProduct): Promise<IProduct & { id: number }> {
+    return updateProduct({ id: Number(id), body }) as never
   }
 
   @Delete('/{id}')
-  public async deleteProduct(@Path('id') id: string) {
+  public async deleteProduct(@Path('id') id: string): Promise<{ message: string }> {
     return deleteProduct({ id: Number(id) });
   }
 

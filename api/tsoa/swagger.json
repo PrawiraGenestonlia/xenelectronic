@@ -6,6 +6,86 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"ICartResponse": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"user": {
+						"properties": {
+							"name": {
+								"type": "string"
+							},
+							"id": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"name",
+							"id"
+						],
+						"type": "object"
+					},
+					"product": {
+						"properties": {
+							"discountEndDate": {
+								"type": "string",
+								"format": "date-time",
+								"nullable": true
+							},
+							"discountPercentage": {
+								"type": "number",
+								"format": "double"
+							},
+							"isAvailable": {
+								"type": "boolean"
+							},
+							"price": {
+								"type": "number",
+								"format": "double"
+							},
+							"postedDate": {
+								"type": "string",
+								"format": "date-time"
+							},
+							"description": {
+								"type": "string"
+							},
+							"previewImageUrl": {
+								"type": "string"
+							},
+							"productName": {
+								"type": "string"
+							},
+							"id": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"discountEndDate",
+							"discountPercentage",
+							"isAvailable",
+							"price",
+							"postedDate",
+							"description",
+							"previewImageUrl",
+							"productName",
+							"id"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"id",
+					"user",
+					"product"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"ICart": {
 				"properties": {
 					"name": {
@@ -91,6 +171,59 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IUserResponse": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"roles": {
+						"items": {
+							"properties": {
+								"role": {
+									"type": "string"
+								},
+								"id": {
+									"type": "number",
+									"format": "double"
+								}
+							},
+							"required": [
+								"role",
+								"id"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					},
+					"carts": {
+						"items": {
+							"properties": {
+								"id": {
+									"type": "number",
+									"format": "double"
+								}
+							},
+							"required": [
+								"id"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"roles",
+					"carts"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IRoutes": {
 				"properties": {
 					"path": {
@@ -169,7 +302,12 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/ICartResponse"
+									},
+									"type": "array"
+								}
 							}
 						}
 					}
@@ -189,7 +327,12 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/ICartResponse"
+									},
+									"type": "array"
+								}
 							}
 						}
 					}
@@ -218,7 +361,25 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/ICartResponse"
+										},
+										{
+											"properties": {
+												"id": {
+													"type": "number",
+													"format": "double"
+												}
+											},
+											"required": [
+												"id"
+											],
+											"type": "object"
+										}
+									]
+								}
 							}
 						}
 					}
@@ -248,7 +409,13 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"type": "number",
+									"enum": [
+										null
+									],
+									"nullable": true
+								}
 							}
 						}
 					}
@@ -321,7 +488,28 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"items": {
+										"allOf": [
+											{
+												"$ref": "#/components/schemas/ICategory"
+											},
+											{
+												"properties": {
+													"id": {
+														"type": "number",
+														"format": "double"
+													}
+												},
+												"required": [
+													"id"
+												],
+												"type": "object"
+											}
+										]
+									},
+									"type": "array"
+								}
 							}
 						}
 					}
@@ -339,7 +527,25 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/ICategory"
+										},
+										{
+											"properties": {
+												"id": {
+													"type": "number",
+													"format": "double"
+												}
+											},
+											"required": [
+												"id"
+											],
+											"type": "object"
+										}
+									]
+								}
 							}
 						}
 					}
@@ -369,7 +575,28 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"items": {
+										"allOf": [
+											{
+												"$ref": "#/components/schemas/ICategory"
+											},
+											{
+												"properties": {
+													"id": {
+														"type": "number",
+														"format": "double"
+													}
+												},
+												"required": [
+													"id"
+												],
+												"type": "object"
+											}
+										]
+									},
+									"type": "array"
+								}
 							}
 						}
 					}
@@ -398,7 +625,40 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"anyOf": [
+										{
+											"allOf": [
+												{
+													"$ref": "#/components/schemas/ICategory"
+												},
+												{
+													"properties": {
+														"id": {
+															"type": "number",
+															"format": "double"
+														}
+													},
+													"required": [
+														"id"
+													],
+													"type": "object"
+												}
+											]
+										},
+										{
+											"properties": {
+												"message": {
+													"type": "string"
+												}
+											},
+											"required": [
+												"message"
+											],
+											"type": "object"
+										}
+									]
+								}
 							}
 						}
 					}
@@ -435,7 +695,17 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
 							}
 						}
 					}
@@ -464,7 +734,48 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"items": {
+										"allOf": [
+											{
+												"$ref": "#/components/schemas/IProduct"
+											},
+											{
+												"properties": {
+													"categoryName": {
+														"allOf": [
+															{
+																"$ref": "#/components/schemas/ICategory"
+															},
+															{
+																"properties": {
+																	"id": {
+																		"type": "number",
+																		"format": "double"
+																	}
+																},
+																"required": [
+																	"id"
+																],
+																"type": "object"
+															}
+														]
+													},
+													"id": {
+														"type": "number",
+														"format": "double"
+													}
+												},
+												"required": [
+													"categoryName",
+													"id"
+												],
+												"type": "object"
+											}
+										]
+									},
+									"type": "array"
+								}
 							}
 						}
 					}
@@ -482,7 +793,25 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/IProduct"
+										},
+										{
+											"properties": {
+												"id": {
+													"type": "number",
+													"format": "double"
+												}
+											},
+											"required": [
+												"id"
+											],
+											"type": "object"
+										}
+									]
+								}
 							}
 						}
 					}
@@ -512,7 +841,45 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/IProduct"
+										},
+										{
+											"properties": {
+												"categoryName": {
+													"allOf": [
+														{
+															"$ref": "#/components/schemas/ICategory"
+														},
+														{
+															"properties": {
+																"id": {
+																	"type": "number",
+																	"format": "double"
+																}
+															},
+															"required": [
+																"id"
+															],
+															"type": "object"
+														}
+													]
+												},
+												"id": {
+													"type": "number",
+													"format": "double"
+												}
+											},
+											"required": [
+												"categoryName",
+												"id"
+											],
+											"type": "object"
+										}
+									]
+								}
 							}
 						}
 					}
@@ -541,7 +908,48 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"items": {
+										"allOf": [
+											{
+												"$ref": "#/components/schemas/IProduct"
+											},
+											{
+												"properties": {
+													"categoryName": {
+														"allOf": [
+															{
+																"$ref": "#/components/schemas/ICategory"
+															},
+															{
+																"properties": {
+																	"id": {
+																		"type": "number",
+																		"format": "double"
+																	}
+																},
+																"required": [
+																	"id"
+																],
+																"type": "object"
+															}
+														]
+													},
+													"id": {
+														"type": "number",
+														"format": "double"
+													}
+												},
+												"required": [
+													"categoryName",
+													"id"
+												],
+												"type": "object"
+											}
+										]
+									},
+									"type": "array"
+								}
 							}
 						}
 					}
@@ -570,7 +978,25 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/IProduct"
+										},
+										{
+											"properties": {
+												"id": {
+													"type": "number",
+													"format": "double"
+												}
+											},
+											"required": [
+												"id"
+											],
+											"type": "object"
+										}
+									]
+								}
 							}
 						}
 					}
@@ -607,7 +1033,17 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
 							}
 						}
 					}
@@ -636,7 +1072,12 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/IUserResponse"
+									},
+									"type": "array"
+								}
 							}
 						}
 					}
@@ -654,7 +1095,9 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"$ref": "#/components/schemas/IUserResponse"
+								}
 							}
 						}
 					}
@@ -699,7 +1142,9 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"$ref": "#/components/schemas/IUserResponse"
+								}
 							}
 						}
 					}
@@ -728,7 +1173,9 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"$ref": "#/components/schemas/IUserResponse"
+								}
 							}
 						}
 					}
@@ -780,7 +1227,17 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
 							}
 						}
 					}
@@ -809,7 +1266,9 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"$ref": "#/components/schemas/IUserResponse"
+								}
 							}
 						}
 					}

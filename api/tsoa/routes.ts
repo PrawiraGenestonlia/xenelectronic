@@ -17,6 +17,16 @@ import * as express from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
+    "ICartResponse": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"double","required":true},
+            "user": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}},"required":true},
+            "product": {"dataType":"nestedObjectLiteral","nestedProperties":{"discountEndDate":{"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"enum","enums":[null]}],"required":true},"discountPercentage":{"dataType":"double","required":true},"isAvailable":{"dataType":"boolean","required":true},"price":{"dataType":"double","required":true},"postedDate":{"dataType":"datetime","required":true},"description":{"dataType":"string","required":true},"previewImageUrl":{"dataType":"string","required":true},"productName":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}},"required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ICart": {
         "dataType": "refObject",
         "properties": {
@@ -48,6 +58,17 @@ const models: TsoaRoute.Models = {
             "isAvailable": {"dataType":"boolean","required":true},
             "discountPercentage": {"dataType":"double","required":true},
             "discountEndDate": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"enum","enums":[null]}],"required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IUserResponse": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"double","required":true},
+            "name": {"dataType":"string","required":true},
+            "roles": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"role":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}},"required":true},
+            "carts": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"id":{"dataType":"double","required":true}}},"required":true},
         },
         "additionalProperties": false,
     },
