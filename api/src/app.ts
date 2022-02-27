@@ -26,7 +26,9 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'developm
 
 // Handle security and origin in production
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'production') {
-  app.use(helmet());
+  app.use(helmet({
+    contentSecurityPolicy: false
+  }));
 }
 
 
